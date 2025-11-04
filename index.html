@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>音视频合成器 (FFmpeg.js)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .input-group { margin-bottom: 15px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        #status { margin-top: 20px; font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <h1>🎬 音视频合成工具 (FFmpeg.js)</h1>
+
+    <div class="input-group">
+        <label for="videoFile">选择无声 MP4 视频:</label><br>
+        <input type="file" id="videoFile" accept="video/mp4">
+    </div>
+
+    <div class="input-group">
+        <label for="audioFile">选择 WAV 音频文件:</label><br>
+        <input type="file" id="audioFile" accept="audio/wav">
+    </div>
+    
+    <button id="mergeBtn" disabled>开始合成视频</button>
+
+    <p id="status">请上传文件...</p>
+
+    <!-- 检查SharedArrayBuffer支持 -->
+    <script>
+        if (typeof SharedArrayBuffer === 'undefined') {
+            document.getElementById('status').textContent = '⚠️ 浏览器不支持SharedArrayBuffer，请使用Chrome/Firefox最新版本，或在本地环境运行';
+            document.getElementById('mergeBtn').disabled = true;
+        }
+    </script>
+    
+    <!-- 使用FFmpeg.js 0.11.0版本 -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
